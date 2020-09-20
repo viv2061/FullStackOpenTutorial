@@ -1,0 +1,19 @@
+browser -> server: HTTP GET html files
+server -> browser: sends html code
+
+** browser renders html code, sees it needs js **
+browser -> server: HTTP GET js code
+server -> browser: sends js code
+
+** browser executes js that requests json data from server **
+browser -> server: HTTP GET json
+server -> browser: sends data.json
+
+** browser continues executing js, renders html code **
+** page is complete **
+
+** user enters new note, submits form **
+** js executes onsubmit function **
+** js executes sendToServer function **
+** js sends POST message to server **
+** js updates notes list locally, and rerenders ul **
