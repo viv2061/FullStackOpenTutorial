@@ -19,7 +19,7 @@ const App = () => {
 	}
 	return (
 		<div>
-			<p>Hello world! Right now, it is { now.getHours() + ":" + now.getMinutes() } </p>
+			<p>Hello world! Right now, it is { now.getHours()}: { now.getMinutes() }, and the day is { now.getDate()}</p>
 			<Component name = { {first: "Plain", last: "Lane"} }/>
 			<Component name = { name }/>
 			<Component name = "Hoo Boi"/>
