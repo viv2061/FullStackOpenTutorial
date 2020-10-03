@@ -1,61 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-
-const Header = function(props) {
-	return(
-		<h1> { props.course } </h1>
-	);
-}
-
-const Part = function (props) {
-	console.log(props);
-	return (
-		<p>{ props.part.name }: { props.part.exercises }</p>	
-	);
-}
-
-const Content = function(props) {
-	console.log(props);
-	return (
-		<div>
-			<Part part = {props.parts[0]}/>
-			<Part part = {props.parts[1]}/>
-			<Part part = {props.parts[2]}/>
-		</div>
-	);
-}
-
-const Total = function(props) {
-	return (
-		<div>
-			<p>Total exercises: { props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises }</p>
-		</div>
-	);
-}
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import CourseComp from "./components/CourseComp.js";
 
 const App = () => {
+	class Course {
+		constructor (id, name, parts) {
+			this.id = id;
+			this.name = name;
+			this.parts = parts;
+		}
+	}
+	
 	class Part {
-		constructor(name, exercises) {
+		constructor(id, name, exercises) {
+			this.id = id;
 			this.name = name;
 			this.exercises = exercises;
 		}
 	};
-
-	const course = {
-		name: 'Half Stack application development',
-		parts: [
-			new Part('Fundamentals of React', 10),
-			new Part('Using props to pass data', 7),
-			new Part('State of a component', 14)
-		]
-	};
   
+	const courses = [
+		new Course(1,
+			"Half Stack application development",
+			[
+				new Part(1, "Fundamentals of React", 10),
+				new Part(2, "Using props to pass data", 7),
+				new Part(3, "State of a component", 14),
+				new Part(4, "Redux", 11)
+			]
+		),
+		new Course(2,
+			"Node.js",
+			[
+				new Part(1, "Routing", 3),
+				new Part(2, "Middlewares", 7)
+			]
+		)
+	]
+
 	return (
 		<div>
-			<Header course = { course.name }/>
-			<Content parts = {course.parts}/>
-			<Total parts = {course.parts}/>
+			{ courses.map(course => <CourseComp key = {course.id} course = {course}/>) }
 		</div>
 	)
 }
@@ -64,5 +50,5 @@ ReactDOM.render(
   	<React.StrictMode>
     	<App />
   	</React.StrictMode>,
-  	document.getElementById('root')
+  	document.getElementById("root")
 );
